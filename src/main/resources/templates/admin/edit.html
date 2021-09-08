@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+</head>
+<body>
+<h1>Edit User</h1>
+<form th:method="PATCH" th:action="@{admin/{id}(id=${userEdit.getId()})}" th:object="${userEdit}">
+
+    <label for="firstname">Enter Firstname</label>
+    <input type="text" th:field="*{firstName}" id="firstname"/> <br/><br/>
+
+    <label for="lastname">Enter Lastname </label>
+    <input type="text" th:field="*{lastName}" id="lastname"/> <br/><br/>
+
+    <label for="Password">Enter Password </label>
+    <input type="text" th:field="*{password}" id="password"/> <br/><br/>
+
+    <b>Add roles</b><br/>
+<!--    <ul>
+        <li th:each="role : ${rolesList}">
+            <input type="checkbox" th:name="List" th:value="${role}"
+                   th:text="${role}"/>
+        </li>
+    </ul>-->
+
+    <label>ADMIN</label>
+    <input type="checkbox" th:value="ROLE_ADMIN" th:name="rolesList"/> <br/>
+    <label>USER</label>
+    <input type="checkbox" th:value="ROLE_USER" th:name="rolesList"/> <br/><br/>
+
+    <input type="submit" value="Update"/>
+</form>
+<br/>
+<input type="button" value="Cancel"
+       onclick="window.location.href = '/users'">
+<br/><br/>
+<input type="button" value="Logout"
+       onclick="window.location.href = '/logout'">
+</body>
+</html>
+
