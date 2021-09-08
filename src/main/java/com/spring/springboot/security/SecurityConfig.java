@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //        /*pass = 1234*/
 //        String pass = "$2a$12$Z5SWWnir8gCltkVXVM1iLebnjlFpz8ROq4xwrtnn1zzj0jQ7ef1IG";
-//        auth.inMemoryAuthentication().withUser("admin").password(pass).roles("ADMIN");
+//        auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("ADMIN");
 //        auth.inMemoryAuthentication().withUser("user").password(pass).roles("USER");
     }
 
