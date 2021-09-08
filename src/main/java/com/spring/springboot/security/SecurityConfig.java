@@ -19,23 +19,11 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
-    private final LoginSuccessHandler loginSuccessHandler;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SecurityConfig(UserDetailsService userDetailsService,
-                          LoginSuccessHandler loginSuccessHandler,
-                          PasswordEncoder passwordEncoder) {
+    public SecurityConfig(UserDetailsService userDetailsService){
         this.userDetailsService = userDetailsService;
-        this.loginSuccessHandler = loginSuccessHandler;
-        this.passwordEncoder = passwordEncoder;
     }
-
-//    @Autowired
-//    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-//        // конфигурация для прохождения аутентификации
-//    }
 
 
     @Override
@@ -44,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //        /*pass = 1234*/
 //        String pass = "$2a$12$Z5SWWnir8gCltkVXVM1iLebnjlFpz8ROq4xwrtnn1zzj0jQ7ef1IG";
-//        auth.inMemoryAuthentication().withUser("admin").password(pass).roles("ADMIN");
+//        auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("ADMIN");
 //        auth.inMemoryAuthentication().withUser("user").password(pass).roles("USER");
     }
 
@@ -82,8 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").anonymous()
                 // защищенные URL
                 .antMatchers("/admin/**").access("hasAuthority('ROLE_ADMIN')")
-                .antMatchers("/user/**").access("hasAuthority('ROLE_USER')")
-                .antMatchers("/user/**").access("hasAuthority('ROLE_ADMIN')")
+                .antMatchers("/user/**").access("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
+
 
                 .anyRequest().authenticated();
 
@@ -93,10 +81,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setForceEncoding(true);
         http.addFilterBefore(filter, CsrfFilter.class);
     }
-
-
-//        @Bean
-//        public PasswordEncoder passwordEncoder () {
-//            return NoOpPasswordEncoder.getInstance();
-//        }
 }

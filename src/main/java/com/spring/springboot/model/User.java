@@ -26,7 +26,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     public User(String firstName, String lastName, String password, Set<Role> roles) {
@@ -44,7 +44,8 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public User(){}
+    public User() {
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -105,10 +106,6 @@ public class User implements UserDetails {
         return firstName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
@@ -130,5 +127,9 @@ public class User implements UserDetails {
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
