@@ -57,8 +57,8 @@ import java.util.List;
     }
 
     @Override
-    public User getUserFirstName(String name) {
-        return userDao.getUserFirstName(name);
+    public User getUserByEmail(String email) {
+        return userDao.getUserByEmail(email);
     }
 
 

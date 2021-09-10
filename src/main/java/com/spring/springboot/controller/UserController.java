@@ -32,7 +32,7 @@ public class UserController {
     public String viewUser(
             Principal principal) {
 
-        long id = userService.getUserFirstName(principal.getName()).getId();
+        long id = userService.getUserByEmail(principal.getName()).getId();
         return "redirect:/user/" + id;
     }
 }

@@ -28,12 +28,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+      //  auth.userDetailsService(userDetailsService);
 
-//        /*pass = 1234*/
-//        String pass = "$2a$12$Z5SWWnir8gCltkVXVM1iLebnjlFpz8ROq4xwrtnn1zzj0jQ7ef1IG";
-//        auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("ADMIN");
-//        auth.inMemoryAuthentication().withUser("user").password(pass).roles("USER");
+        /*pass = 1234*/
+        String pass = "$2a$12$Z5SWWnir8gCltkVXVM1iLebnjlFpz8ROq4xwrtnn1zzj0jQ7ef1IG";
+        auth.inMemoryAuthentication().withUser("admin").password(pass).roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("user").password(pass).roles("USER");
     }
 
     @Override
@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем action с формы логина
                 .loginProcessingUrl("/login")
                 // Указываем параметры логина и пароля с формы логина
-                .usernameParameter("j_username")
+                .usernameParameter("j_email")
                 .passwordParameter("j_password")
                 // даем доступ к форме логина всем
                 .permitAll();
@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // делаем страницу регистрации недоступной для авторизированных пользователей
                 .authorizeRequests()
                 //страницы аутентификаци доступна всем
-                .antMatchers("/login").anonymous()
+//                .antMatchers("/login").anonymous()
                 // защищенные URL
                 .antMatchers("/admin/**").access("hasAuthority('ROLE_ADMIN')")
                 .antMatchers("/user/**").access("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
