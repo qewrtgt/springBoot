@@ -28,12 +28,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-      //  auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService);
 
         /*pass = 1234*/
-        String pass = "$2a$12$Z5SWWnir8gCltkVXVM1iLebnjlFpz8ROq4xwrtnn1zzj0jQ7ef1IG";
-        auth.inMemoryAuthentication().withUser("admin").password(pass).roles("ADMIN");
-        auth.inMemoryAuthentication().withUser("user").password(pass).roles("USER");
+//        String pass = "$2a$12$Z5SWWnir8gCltkVXVM1iLebnjlFpz8ROq4xwrtnn1zzj0jQ7ef1IG";
+//        auth.inMemoryAuthentication().withUser("admin").password(pass).roles("ADMIN");
+//        auth.inMemoryAuthentication().withUser("user").password(pass).roles("USER");
     }
 
     @Override
@@ -67,18 +67,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // делаем страницу регистрации недоступной для авторизированных пользователей
                 .authorizeRequests()
                 //страницы аутентификаци доступна всем
-//                .antMatchers("/login").anonymous()
+                .antMatchers("/login").anonymous()
                 // защищенные URL
                 .antMatchers("/admin/**").access("hasAuthority('ROLE_ADMIN')")
                 .antMatchers("/user/**").access("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
-
-
                 .anyRequest().authenticated();
 
         //filter utf-8
-        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        filter.setEncoding("UTF-8");
-        filter.setForceEncoding(true);
-        http.addFilterBefore(filter, CsrfFilter.class);
+//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+//        filter.setEncoding("UTF-8");
+//        filter.setForceEncoding(true);
+//        http.addFilterBefore(filter, CsrfFilter.class);
     }
 }

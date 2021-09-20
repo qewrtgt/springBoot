@@ -5,7 +5,7 @@ import com.spring.springboot.model.Role;
 
 import java.util.List;
 
-public interface RoleDao {
+public interface RoleDao{
     public List<Role> getAllRoles();
 
     public void addRole(Role role);

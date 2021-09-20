@@ -3,6 +3,7 @@ package com.spring.springboot.controller;
 import com.spring.springboot.model.User;
 import com.spring.springboot.service.roles.RoleService;
 import com.spring.springboot.service.users.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,10 @@ public class AdminController {
     }
 
     @GetMapping(value = "")
-    public String allUsers(ModelMap model) {
-
-        model.addAttribute("users", userService.getAllUsers());
+     public String allUsers(ModelMap model) {
+        model.addAttribute("authorizedUser",
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        model.addAttribute("allUsers", userService.getAllUsers());
         return "admin/admin";
     }
 

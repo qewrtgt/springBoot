@@ -14,7 +14,7 @@
     <name>springBoot</name>
     <description>springBoot</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>16</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -56,6 +56,27 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.3.1-1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.webjars/popper.js -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>popper.js</artifactId>
+            <version>1.14.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.3.1</version>
         </dependency>
     </dependencies>
 
