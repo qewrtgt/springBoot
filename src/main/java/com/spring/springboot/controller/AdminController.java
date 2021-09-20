@@ -25,26 +25,20 @@ public class AdminController {
         model.addAttribute("authorizedUser",
                 SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("allUsers", userService.getAllUsers());
+        model.addAttribute("newUser", new User());
+        model.addAttribute("allRoles", roleService.getAllRoles());
+
         return "admin/admin";
     }
 
-    @PostMapping()
+    @PostMapping(value = "/create")
     public String creatUser(
             @ModelAttribute("newUser") User user,
-            @RequestParam(value = "rolesList", required = false) String[] checkboxRoles) {
+            @RequestParam(value = "listRoles", required = false) String[] listRoles) {
 
-        user.setRoles(roleService.setRoleByName(user.getName(), checkboxRoles));
+        user.setRoles(roleService.setRoleByName(user.getName(), listRoles));
         userService.addUser(user);
         return "redirect:/admin";
-    }
-
-
-    @GetMapping(value = "/new")
-    public String addUser(
-            ModelMap model) {
-
-        model.addAttribute("user", new User());
-        return "admin/new";
     }
 
 
