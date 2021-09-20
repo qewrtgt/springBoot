@@ -42,7 +42,7 @@ public class AdminController {
     }
 
 
-    @GetMapping(value = "/{id}/delete")
+    @DeleteMapping(value = "/{id}/delete")
     public String deleteUser(
             @PathVariable("id") long id) {
 
