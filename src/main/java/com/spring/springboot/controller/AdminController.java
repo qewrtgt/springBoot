@@ -21,13 +21,12 @@ public class AdminController {
     }
 
     @GetMapping(value = "")
-     public String allUsers(ModelMap model) {
-        model.addAttribute("authorizedUser",
+     public String getAllUsers(ModelMap model) {
+                model.addAttribute("authorizedUser",
                 SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("allUsers", userService.getAllUsers());
         model.addAttribute("newUser", new User());
         model.addAttribute("allRoles", roleService.getAllRoles());
-
         return "admin/admin";
     }
 
@@ -35,7 +34,6 @@ public class AdminController {
     public String creatUser(
             @ModelAttribute("newUser") User user,
             @RequestParam(value = "listRoles", required = false) String[] listRoles) {
-
         user.setRoles(roleService.setRoleByName(user.getName(), listRoles));
         userService.addUser(user);
         return "redirect:/admin";
@@ -45,30 +43,17 @@ public class AdminController {
     @DeleteMapping(value = "/{id}/delete")
     public String deleteUser(
             @PathVariable("id") long id) {
-
         userService.deleteUserById(id);
         return "redirect:/admin";
     }
 
 
-    @GetMapping(value = "/{id}/edit")
+    @PostMapping(value = "/{id}/edit")
     public String editUser(
             ModelMap model,
             @PathVariable("id") long id) {
-
         model.addAttribute("rolesList", roleService.getAllRoles());
         model.addAttribute("userEdit", userService.getUserById(id));
-        return "admin/edit";
-    }
-
-
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("userEdit") User user,
-                         @PathVariable("id") int id,
-                         @RequestParam(value = "rolesList", required = false) String[] checkboxRoles) {
-
-        user.setRoles(roleService.setRoleByName(user.getName(), checkboxRoles));
-        userService.updateUser(user);
         return "redirect:/admin";
     }
 }
