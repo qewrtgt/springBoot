@@ -7,17 +7,17 @@ import java.util.Set;
 
 public interface RoleService {
 
-    public List<Role> getAllRoles();
+    List<Role> getAllRoles();
 
-    public void addRole(Role role);
+    void addRole(Role role);
 
-    public void updateRole(Role role);
+    void updateRole(Role role);
 
-    public Role getRoleById(long id);
+    Role getRoleById(long id);
 
-    public void deleteRole(Role role);
+    void deleteRole(Role role);
 
-    public void deleteRoleById(long id);
+    void deleteRoleById(long id);
 
     Set<Role> setRoleByName(String name, String[] rolesName);
 }

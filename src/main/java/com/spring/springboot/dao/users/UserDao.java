@@ -7,17 +7,17 @@ import com.spring.springboot.model.User;
 import java.util.List;
 
 public interface UserDao {
-    public List<User> getAllUsers();
+    List<User> getAllUsers();
 
-    public void addUser(User user);
+    void addUser(User user);
 
-    public void updateUser(User user);
+    void updateUser(User user);
 
-    public User getUserById(long id);
+    User getUserById(long id);
 
-    public void deleteUser(User user);
+    void deleteUser(User user);
 
-    public void deleteUserById(long id);
+    void deleteUserById(long id);
 
-    public User getUserByEmail(String firstname);
+    User getUserByEmail(String firstname);
 }

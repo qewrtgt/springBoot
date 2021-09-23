@@ -50,7 +50,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     public Set<Role> setRoleByName(String name, String[] rolesName) {
-        Set<Role> roleSet = new HashSet<Role>();
+        Set<Role> roleSet = new HashSet<>();
         if (rolesName != null) {
             for (String roleName : rolesName) {
                 roleSet.add(roleDao.getRoleByName(roleName));
