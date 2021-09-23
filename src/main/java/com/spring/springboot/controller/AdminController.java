@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
@@ -21,12 +23,14 @@ public class AdminController {
     }
 
     @GetMapping(value = "")
-     public String getAllUsers(ModelMap model) {
-                model.addAttribute("authorizedUser",
-                SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    public String getAllUsers(ModelMap model) {
+
+        User autorizedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("authorizedUser", autorizedUser);
         model.addAttribute("allUsers", userService.getAllUsers());
         model.addAttribute("newUser", new User());
         model.addAttribute("allRoles", roleService.getAllRoles());
+        model.addAttribute("userRolesStr", userService.getRolesString(autorizedUser));
         return "admin/admin";
     }
 
@@ -40,20 +44,19 @@ public class AdminController {
     }
 
 
-    @DeleteMapping(value = "/{id}/delete")
-    public String deleteUser(
-            @PathVariable("id") long id) {
-        userService.deleteUserById(id);
+    @DeleteMapping(value = "/delete")
+    public String deleteUser(@ModelAttribute User user) {
+        System.out.println(user);
+        userService.deleteUser(user);
         return "redirect:/admin";
     }
 
 
-    @PostMapping(value = "/{id}/edit")
-    public String editUser(
-            ModelMap model,
-            @PathVariable("id") long id) {
-        model.addAttribute("rolesList", roleService.getAllRoles());
-        model.addAttribute("userEdit", userService.getUserById(id));
+    @PatchMapping(value = "/update")
+    public String updateUser(@ModelAttribute User user, @RequestParam(value = "roleList", required = false) String[] selectedRoles) {
+        System.out.println(user);
+        System.out.println(Arrays.toString(selectedRoles));
+        userService.updateUser(user, selectedRoles);
         return "redirect:/admin";
     }
 }

@@ -6,18 +6,18 @@ import com.spring.springboot.model.Role;
 import java.util.List;
 
 public interface RoleDao{
-    public List<Role> getAllRoles();
+   List<Role> getAllRoles();
 
-    public void addRole(Role role);
+   void addRole(Role role);
 
-    public void updateRole(Role role);
+   void updateRole(Role role);
 
-    public Role getRoleById(long id);
+   Role getRoleById(long id);
 
-    public void deleteRole(Role role);
+   void deleteRole(Role role);
 
-    public void deleteRoleById(long id);
+   void deleteRoleById(long id);
 
-    public Role getRoleByName(String name);
+   Role getRoleByName(String name);
 
 }

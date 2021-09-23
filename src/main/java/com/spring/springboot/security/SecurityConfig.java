@@ -8,10 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
 
 @Configuration
@@ -21,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SecurityConfig(UserDetailsService userDetailsService){
+    public SecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
@@ -69,14 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers("/admin/**").access("hasAuthority('ROLE_ADMIN')")
-                .antMatchers("/user/**").access("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
+                .antMatchers("/admin/**").access("hasAuthority('ADMIN')")
+                .antMatchers("/user/**").access("hasAuthority('USER') or hasAuthority('ADMIN')")
                 .anyRequest().authenticated();
-
-        //filter utf-8
-//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-//        filter.setEncoding("UTF-8");
-//        filter.setForceEncoding(true);
-//        http.addFilterBefore(filter, CsrfFilter.class);
     }
 }

@@ -1,6 +1,4 @@
-package com.spring.springboot.service.users;
-
-
+package com.spring.springboot.service;
 
 import com.spring.springboot.model.User;
 
@@ -14,11 +12,11 @@ public interface UserService {
 
     void updateUser(User user, String[] selectedRoles);
 
-    User getUserById(Long id);
+    User getUserById(int id);
 
     void deleteUser(User user);
 
-    void deleteUserById(long id);
+    void deleteUserById(int id);
 
     User getUserByEmail(String email);
 

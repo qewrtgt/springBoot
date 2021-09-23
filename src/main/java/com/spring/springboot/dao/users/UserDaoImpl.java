@@ -2,7 +2,6 @@ package com.spring.springboot.dao.users;
 
 
 import com.spring.springboot.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
